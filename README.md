@@ -23,3 +23,14 @@ Now install all the required packages, as listed in requirements.txt
 ```commandline
 pip install -r requirements.txt
 ```
+
+### Running unit tests
+
+To run all of the unit tests, run:
+```commandline
+python3 manage.py test api_data.tests
+```
+Or for a specific file:
+```commandline
+python3 manage.py test api_data.tests.testModels
+```
