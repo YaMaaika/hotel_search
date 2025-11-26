@@ -24,6 +24,19 @@ Now install all the required packages, as listed in requirements.txt
 pip install -r requirements.txt
 ```
 
+### Running the server
+
+Now it is time to run the webserver and see the hotel data in the browser.
+
+To run the server:
+```commandline
+python manage.py runserver
+```
+
+Navigate to `http://127.0.0.1:8000/hotel_search/`
+
+Search for a city to get hotels in that city
+
 ### Running unit tests
 
 To run all of the unit tests, run:

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel Search</title>
+</head>
+<body>
+    <h1>Hotel Search</h1>
+    <h5>Enter city name to get a list of hotels in that city (for example "Amsterdam")</h5>
+
+    <!--  Form to let the user enter the city, where he wants to find hotels for  -->
+    <div class="search-box">
+        <form method="get" class="search-form">
+            <input
+                type="text"
+                name="city"
+                value="{{ query }}"
+                autofocus
+            >
+            <!-- When this form is submitted it will reach the hotel_search view with the city as query param -->
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="results">
+        {% if query %}
+            <!-- Show the hotels that are in the chosen city -->
+            {% if hotels_in_city %}
+                <ul class="hotel-list">
+                    {% for hotel in hotels_in_city %}
+                        <div class="hotel-name">{{ hotel.name }}</div>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <!-- If no hotels were found, show a note about that -->
+                <div class="no-results">
+                    <p>No hotels found for "{{ query }}"</p>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
