@@ -11,7 +11,7 @@ def hotel_search(request):
         request: The HTTP request object, including the query param
 
     Returns:
-        HttpResponse: An HTTP response object that renders the 'api_data/data_list.html' template,
+        HttpResponse: An HTTP response object that renders the 'api_data/hotel_search.html' template,
         that includes a list of hotels that was found for the city
     """
 
@@ -27,7 +27,7 @@ def hotel_search(request):
 
     else:
         # Filter the Hotels based on the city that was passed.
-        # Search for an exact match but case insensitive
+        # Search for an exact match but case-insensitive (hence the iexact filter)
         hotels_in_city = Hotel.objects.filter(city__name__iexact=query).select_related('city')
 
         # Filter in the template using the query
@@ -36,4 +36,4 @@ def hotel_search(request):
             'hotels_in_city': hotels_in_city,
         }
 
-    return render(request, 'api_data/data_list.html', context)
+    return render(request, 'api_data/hotel_search.html', context)
