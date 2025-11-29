@@ -32,6 +32,19 @@ There is the `fetch_api_data.py` script that accomplishes this.
 It fetches the API data from the external API and imports it to Django models,
 thereby creating the relation between Hotel and City (a Hotel is situated in a certain City).
 
+#### Get the API url, username and password the env
+
+Since the API url, username and password for the API are sensitive, they are not added in the normal code base.
+Instead you should add them in an `.env` file at the root of your project.
+
+The `.env` file should look like this:
+```commandline
+API_USERNAME='my_username'
+API_PASSWORD='my_password'
+API_CITY_URL='api_city_url'
+API_HOTEL_URL='api_hotel_url'
+```
+
 To run the script, run:
 ```commandline
 python manage.py fetch_api_data

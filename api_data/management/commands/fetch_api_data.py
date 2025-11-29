@@ -1,9 +1,9 @@
 import requests
 
 from django.core.management.base import BaseCommand
+from django.conf import settings
 
 from api_data.models import Hotel, City
-
 
 
 class Command(BaseCommand):
@@ -29,15 +29,14 @@ class Command(BaseCommand):
         Returns:
             count (int): The number of cities that were created or updated
         """
-        api_url = ''        # Im not adding the url as Im not sure I can publish it
-        # TODO: store the username and password in an env var and make an authenticated HTTP request
-        # for now it also works without authentication
-        username = ''
-        password = ''
+
+        # Get the API urls, username and password from the env vars (through settings)
+        api_url = settings.API_CITY_URL
+        username = settings.API_USERNAME
+        password = settings.API_PASSWORD
 
         try:
-            #response = requests.get(api_url, auth=HTTPBasicAuth(username, password))
-            response = requests.get(api_url)
+            response = requests.get(api_url, auth=requests.auth.HTTPBasicAuth(username, password))
 
             if response.status_code == 200:
                 lines = response.text.strip().split('\n')
@@ -61,7 +60,7 @@ class Command(BaseCommand):
                         if created:
                             cities_added_count += 1
 
-            return cities_read_count, cities_added_count
+                return cities_read_count, cities_added_count
 
         except requests.RequestException as e:
             self.stdout.write(
@@ -78,15 +77,14 @@ class Command(BaseCommand):
         Returns:
             count (int): The number of hotels that were created or updated
         """
-        api_url = ''        # Im not adding the url as Im not sure I can publish it
-        # TODO: store the username and password in an env var and make an authenticated HTTP request
-        # for now it also works without authentication
-        username = ''
-        password = ''
+
+        # Get the API urls, username and password from the env vars (through settings)
+        api_url = settings.API_HOTEL_URL
+        username = settings.API_USERNAME
+        password = settings.API_PASSWORD
 
         try:
-            # response = requests.get(api_url, auth=HTTPBasicAuth(username, password))
-            response = requests.get(api_url)
+            response = requests.get(api_url, auth=requests.auth.HTTPBasicAuth(username, password))
 
             if response.status_code == 200:
                 lines = response.text.strip().split('\n')
@@ -116,8 +114,7 @@ class Command(BaseCommand):
                         if created:
                             hotels_added_count += 1
 
-            return hotels_read_count, hotels_added_count
-
+                return hotels_read_count, hotels_added_count
 
         except requests.RequestException as e:
             self.stdout.write(
