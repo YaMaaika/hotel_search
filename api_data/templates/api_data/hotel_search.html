@@ -1,7 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>Hotel Search</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.9/dist/css/autoComplete.min.css">
 </head>
 <body>
     <h1>Hotel Search</h1>
@@ -11,10 +13,12 @@
     <div class="search-box">
         <form method="get" class="search-form">
             <input
+                id="autoComplete"
                 type="text"
                 name="city"
                 value="{{ query }}"
                 autofocus
+                autocomplete="off"
             >
             <!-- When this form is submitted it will reach the hotel_search view with the city as query param -->
             <button type="submit">Search</button>
@@ -38,5 +42,7 @@
             {% endif %}
         {% endif %}
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.9/dist/autoComplete.min.js"></script>
+    <script src="{% static 'api_data/js/hotel_search.js' %}"></script>
 </body>
 </html>

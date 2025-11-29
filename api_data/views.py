@@ -1,11 +1,28 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 
-from .models import Hotel
+from .models import Hotel, City
+
+
+def get_cities(request):
+    """
+    API endpoint to get all cities
+
+    Args:
+        request: The HTTP request object
+
+    Returns:
+        JsonResponse: a JSON with all the potential cities
+    """
+
+    cities =City.objects.all().values_list('name', flat=True).order_by('name')
+
+    return JsonResponse(list(cities), safe=False)
 
 
 def hotel_search(request):
     """
-    Search for hotels based on the city that is passed in the query param.
+    API endpoint to get all hotels for a certain city. The city is passed in the query param.
 
     Args:
         request: The HTTP request object, including the query param

@@ -53,6 +53,11 @@ class Command(BaseCommand):
                         #  identifier of the city. Verify with the API documentation that this is indeed the case
                         city_id = parts[0].strip()
                         city_name = parts[1].strip()
+
+                        # Remove the quotation marks from the strings (they come in as '"Amsterdam"')
+                        city_id = city_id.replace('"', '')
+                        city_name = city_name.replace('"', '')
+
                         cities_read_count += 1
                         city, created = City.objects.update_or_create(
                             id=city_id,
@@ -111,6 +116,11 @@ class Command(BaseCommand):
                         #  (i.e.no two hotels with the same names in the same city should exist,
                         #  but the same name in different cities can)
                         hotel_name = parts[2].strip()
+
+                        # Remove the quotation marks from the strings (they come in as '"Amsterdam"')
+                        hotel_city_id = hotel_city_id.replace('"', '').replace("'", '')
+                        hotel_id = hotel_id.replace('"', '').replace("'", '')
+                        hotel_name = hotel_name.replace('"', '').replace("'", '')
 
                         city = City.objects.get(id=hotel_city_id)
 

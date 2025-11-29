@@ -5,4 +5,5 @@ app_name = 'api_data'
 
 urlpatterns = [
     path('', views.hotel_search, name='hotel_search'),
+    path('get_cities/', views.get_cities, name='get_cities'),
 ]
