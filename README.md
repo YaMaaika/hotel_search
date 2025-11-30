@@ -57,16 +57,26 @@ API_CITY_URL='api_city_url'
 API_HOTEL_URL='api_hotel_url'
 ```
 
-To run the script, run:
+#### Run migrations for DB tables
+
+Now, run migrations to get the DB tables:
+```commandline
+python manage.py migrate
+```
+
+Then run the `fetch_api_data.py` script, run:
 ```commandline
 python manage.py fetch_api_data
 ```
+
+You might see a lot of warnings printed about multiple hotels with the same name and city, this is a known issue.
 
 ### Cronjob for automating daily data import
 
 Since the API data is daily updated, you might want to automate the API data fetching as well.
 
 The project includes a script that adds a cronjob that accomplishes this daily update at 2AM at night.
+Note! For now the cronjob doesnt work because it doesnt have access to the env file, fix this
 
 1. Open your terminal.
 2. Navigate to the project directory (where `daily_update.sh` is located).

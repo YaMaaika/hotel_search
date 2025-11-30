@@ -140,7 +140,7 @@ class Command(BaseCommand):
 
                         except IntegrityError as e:
                             self.stdout.write(
-                                self.style.ERROR(f'Error for hotel with ID {hotel_id} and name {hotel_name} in {city.name}: {str(e)}')
+                                self.style.WARNING(f'Error for hotel with ID {hotel_id} and name {hotel_name} in {city.name}: {str(e)}')
                             )
 
                     # TODO: raise an error if the API data structure is not as expected

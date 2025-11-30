@@ -8,7 +8,7 @@ SCRIPT_PATH="$SCRIPT_DIR/manage.py fetch_api_data"
 LOG_FILE="$SCRIPT_DIR/logfile.log"
 
 # Add the cron job
-( crontab -l 2>/dev/null; echo "19 19 * * * /usr/bin/python3 $SCRIPT_PATH >> $LOG_FILE 2>&1" ) | crontab -
+( crontab -l 2>/dev/null; echo "0 2 * * * /usr/bin/python3 $SCRIPT_PATH >> $LOG_FILE 2>&1" ) | crontab -
 
 current_date=$(date +"%d-%m-%Y %H:%M")
 
