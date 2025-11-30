@@ -1,5 +1,6 @@
 import requests
 
+from django.db import IntegrityError
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
@@ -112,9 +113,6 @@ class Command(BaseCommand):
                         #  is a unique identifier of the city. Verify with the API documentation that this is indeed the case
                         hotel_city_id = parts[0].strip()
                         hotel_id = parts[1].strip()
-                        # TODO you might want to make the combination of hotel.id and hotel.city unique
-                        #  (i.e.no two hotels with the same names in the same city should exist,
-                        #  but the same name in different cities can)
                         hotel_name = parts[2].strip()
 
                         # Remove the quotation marks from the strings (they come in as '"Amsterdam"')
@@ -128,16 +126,22 @@ class Command(BaseCommand):
 
                         hotels_read_count +=1
 
-                        hotel, created = Hotel.objects.update_or_create(
-                            id=hotel_id,
-                            defaults={
-                                'name': hotel_name,
-                                'city': city
-                            }
-                        )
-                        city.save()
-                        if created:
-                            hotels_added_count += 1
+                        try:
+                            hotel, created = Hotel.objects.update_or_create(
+                                id=hotel_id,
+                                defaults={
+                                    'name': hotel_name,
+                                    'city': city
+                                }
+                            )
+                            city.save()
+                            if created:
+                                hotels_added_count += 1
+
+                        except IntegrityError as e:
+                            self.stdout.write(
+                                self.style.ERROR(f'Error for hotel with ID {hotel_id} and name {hotel_name} in {city.name}: {str(e)}')
+                            )
 
                     # TODO: raise an error if the API data structure is not as expected
 

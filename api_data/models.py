@@ -28,3 +28,10 @@ class Hotel(models.Model):
     class Meta:
         verbose_name_plural = "Hotel"
 
+        # I noticed that in the API data there are multiple instances of hotels with the same name for the same city
+        # (but with a different ID)
+        # We'd probably want to prevent adding these multiple instances.
+        # For now I took the approach of adding a unique constraint for the 'name' and 'city' combination,
+        # and at the import (`fetch_api_data`) logging those duplicates to the logfile
+        unique_together = [['name', 'city']]
+
