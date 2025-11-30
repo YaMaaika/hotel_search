@@ -7,7 +7,6 @@
 </head>
 <body>
     <h1>Hotel Search</h1>
-    <h5>Enter city name to get a list of hotels in that city (for example "Amsterdam")</h5>
 
     <!--  Form to let the user enter the city, where he wants to find hotels for  -->
     <div class="search-box">
@@ -27,6 +26,7 @@
 
     <div class="results">
         {% if query %}
+            <h4>Hotels in {{ query }}:</h4>
             <!-- Show the hotels that are in the chosen city -->
             {% if hotels_in_city %}
                 <ul class="hotel-list">
