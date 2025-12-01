@@ -11,6 +11,16 @@ The project includes also a cronjob that schedules a daily fetching of the API d
 The project works for now with an SQLLite db to store the data.
 
 
+#### Known issues
+
+There are a few known issues that still need fixing:
+- Add unittest for the views and templates
+- Fix potential issues with data import
+- The city search form doesn't submit when clicking enter (only when clicking on the 'submit' button)
+- Fix CSS for the webpage
+- The AutocompleteJS library throws a warning about a favicon
+
+
 ## Running and viewing the project
 
 
