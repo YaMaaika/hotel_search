@@ -71,30 +71,6 @@ python manage.py fetch_api_data
 
 You might see a lot of warnings printed about multiple hotels with the same name and city, this is a known issue.
 
-### Cronjob for automating daily data import
-
-Since the API data is daily updated, you might want to automate the API data fetching as well.
-
-The project includes a script that adds a cronjob that accomplishes this daily update at 2AM at night.
-Note! For now the cronjob doesnt work because it doesnt have access to the env file, fix this
-
-1. Open your terminal.
-2. Navigate to the project directory (where `daily_update.sh` is located).
-3. Make the script executable:
-    ```bash
-    chmod +x daily_update.sh
-    ```
-4. Run the script:
-    ```bash
-    ./daily_update.sh
-    ```
-5. To confirm that the cron job was added successfully, you can check your current cron jobs with:
-    ```bash
-    crontab -l
-    ```
-The cronjob logs its results to the logile.log that should appear at the root of the project once the cronjob has run once.
-
-
 ### Running the server
 
 Now it is time to run the webserver and see the hotel data in the browser.
